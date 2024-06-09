@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stunning Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .about-images {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .navigation button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Let's Race</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <div class="hero-text">
+                <h1>RELEASING THE MONSTER</h1>
+                <p>Drive it off >> Dont just show off !!</p>
+                <a href="#services" class="btn">Learn More</a>
+            </div>
+        </div>
+    </header>
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>The *BMW 3 Series* is a quintessential sports sedan that blends performance, luxury, and cutting-edge technology. Renowned for its agile handling and powerful engine options, including turbocharged four- and six-cylinder variants, the 3 Series offers a thrilling driving experience. Inside, it features a premium interior with advanced infotainment systems, high-quality materials, and ample comfort. This model continues to set the standard for driving dynamics and innovation in the compact luxury sedan segment.</p>
+        <div class="about-images">
+            <div class="slides">
+                <img src="https://www.pixelstalk.net/wp-content/uploads/images6/BMW-HD-Wallpaper-4K-Free-download.jpg" alt="BMW 3 Series 1">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.SaChicc4tBSnivQNpWXZywHaEK&pid=Api&P=0&h=180" alt="BMW 3 Series 2">
+                <img src="https://www.wallpaperflare.com/static/453/886/532/bmw-concept-8-series-hd-blue-bmw-wallpaper.jpg" alt="BMW 3 Series 3">
+                <img src="https://wallpaperaccess.com/full/1125219.jpg" alt="BMW 3 Series 4">
+                <img src="https://www.pixelstalk.net/wp-content/uploads/2016/10/Download-BMW-Logo-Picture.jpg" alt="BMW 3 Series 5">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.u0q0wyEmR7yQ6UMta1Wt_AHaEK&pid=Api&P=0&h=180" alt="BMW 3 Series 6">
+            </div>
+            <div class="navigation">
+                <button class="prev">❮</button>
+                <button class="next">❯</button>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-items">
+            <div class="service-item">
+                <i class="fas fa-cog"></i>
+                <h3>Premium Maintenance Plans</h3>
+                <p>Comprehensive scheduled maintenance-
+                    Genuine BMW parts and fluids-
+                    Certified BMW technicians.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Advanced Connectivity Services</h3>
+                <p>BMW ConnectedDrive features-
+                    Real-time traffic information-
+                    Remote services and vehicle tracking.</p>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Luxury Assistance Programs</h3>
+                <p>24/7 roadside assistance-
+                    Concierge services-
+                    Trip interruption coverage and emergency services.</p>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form id="contactForm" action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    <footer class="footer">
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+    </footer>
+    <script>
+        const slides = document.querySelector('.slides');
+        const images = document.querySelectorAll('.slides img');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        let index = 0;
+
+        function showSlide(index) {
+            const width = images[0].clientWidth;
+            slides.style.transform = `translateX(${-index * width}px)`;
+        }
+        function nextSlide() {
+            index = (index + 1) % images.length;
+            showSlide(index);
+        }
+        function prevSlide() {
+            index = (index - 1 + images.length) % images.length;
+            showSlide(index);
+        }
+        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+        setInterval(nextSlide, 3000);
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Message sent successfully!');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
