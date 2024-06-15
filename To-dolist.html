@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            background-image: url('https://www.hdwallpapers.in/download/photography_lighting_road_during_night_time_4k_hd-3840x2160.jpg'); 
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 50px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .list-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .list-box h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+        .list-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .list-box ul li {
+            background: #eee;
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .input-box {
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-box input {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .input-box select {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 150px;
+        }
+        .input-box button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .input-box button img {
+            margin-right: 5px;
+        }
+        .input-box button:hover {
+            background-color: #0056b3;
+        }
+        .home-btn {
+            margin-right: 10px;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            height:30px;
+        }
+        .home-btn img {
+            margin-right: 5px;
+        }
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <div class="input-container">
+        <button class="home-btn" onclick="reloadPage()">
+            <img src="https://cdn-icons-png.flaticon.com/128/25/25694.png" alt="Home Icon" width="25" height="25">
+            Home
+        </button>
+        <div class="input-box">
+            <input type="text" id="taskInput" placeholder="Add a task...">
+            <select id="prioritySelect">
+                <option value="highPriorityList">High Priority</option>
+                <option value="mediumPriorityList">Medium Priority</option>
+                <option value="lowPriorityList">Low Priority</option>
+            </select>
+            <button onclick="addTask()">Add</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="list-box" id="highPriorityList">
+            <h2>High Priority</h2>
+            <ul></ul>
+        </div>
+        <div class="list-box" id="mediumPriorityList">
+            <h2>Medium Priority</h2>
+            <ul></ul>
+        </div>
+        <div class="list-box" id="lowPriorityList">
+            <h2>Low Priority</h2>
+            <ul></ul>
+        </div>
+    </div>
+    <script>
+        function reloadPage() {
+            window.location.reload();
+        }
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const task = input.value.trim();
+            const priority = document.getElementById('prioritySelect').value;
+            if (task) {
+                const ul = document.querySelector(`#${priority} ul`);
+                const li = document.createElement('li');
+                const taskText = document.createElement('span');
+                taskText.textContent = task;
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.onclick = function() {
+                    ul.removeChild(li);
+                };
+                const checkBox = document.createElement('input');
+                checkBox.type = 'checkbox';
+                checkBox.onchange = function() {
+                    if (checkBox.checked) {
+                        li.classList.add('completed');
+                        ul.appendChild(li);
+                    } else {
+                        li.classList.remove('completed');
+                        ul.insertBefore(li, ul.firstChild);
+                    }
+                };
+                li.appendChild(checkBox);
+                li.appendChild(taskText);
+                li.appendChild(deleteBtn);
+                ul.appendChild(li);
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
